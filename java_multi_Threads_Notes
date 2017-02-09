@@ -1,0 +1,63 @@
+1, 线程池， 并发， 线程复用（thread reuse）
+2, Executors规定线程的执行顺序
+3, Callable需要实现call()，Runnable需要实现run()；call()可以返回任何对象, run()返回void
+4, Concurrency1::主线程， 顺序执行
+5, runnable就是从主线程中分出线程， 输出时有序是因为输出队列
+6, 两种线程：：Extends Thread 和 implements Runnable都要实现run()
+7, 线程.join()就是让主线程等自己执行完
+8, Thread.sleep(毫秒)是指当前线程睡多久
+9, 主线程可通过传参给线程对象，达到控制线程的作用
+10, 多线程同时操作同一变量：：
+11, synchronized相当于锁
+12, 判断变量受不受多线程影响， 关键就是同一时刻，是否有多个线程访问
+13, 生产者/消费者用wait(毫秒)，notify（）实现线程沟通
+14, Lock 是一个类， 可以实现和synchronized相似地锁代码段
+15, lock生成的condition, 可以调用await()和signal()
+16, synchronized两种用法::在方法定义时使用; 锁定代码段
+17, 写生产者-消费者， 分情况讨论
+18, lock.lock()用lock.unlock()解锁
+19, await(), signal()要搭配condition使用
+20, semaphore就是"a set of permits"规定每次的最大并发数, 搭配acquire();release();
+21, 可用循环一次创建多个线程
+22, CurrentLibrary::本质就是锁住Queue,Map等数据结构， 不让操作同时执行
+23, BlockingQueues, 线程安全queue（存、取在代码上看，就像同时一样； 
+					即使为空时，如果取线程先执行， 也会等着存线程执行后，再执行）
+					put(), take()
+24, HashMap线程不安全，put()会引起死循环
+25, ConcurrentMap线程安全， put(), get(), 如果get()先执行，  直接返回null, 不会等待put()
+26, countdownlatch就是锁住一堆线程，倒数， 全部完成才回到主线程
+				  倒数初始值一经设定， 不能更改
+				  两个操作：：latch.await();latch.countDown();
+27, CyclicBarriers 常用于每到一个阶段就同步的情况, 可以reset()等待线程执行完的数量; 
+				   直到所有属于这个阶段的线程都调用了await()方法为止
+                   CyclicBarriers 常用于线程之间相互等待 CountDownLatch常用于一个线程等一组线程
+                   CyclicBarrier 用new Runnable{}创建一个barriers
+28, DelayQueues::是unbounded BlockingQueue， 对象只能在其到期时才能从队列中取走， 有序队列， 队首是延迟时间最短的， 不能放null， size()返回过期的和没过期的， 
+				 要复写compareTo(),用于队列排序； 
+				 仍然是put(), take()
+29, Exchangers::两个线程交换对象， exchange(把自己的送出去)， 返回值是对方送过来的值
+				每个线程只关心把自己的值送出去
+30, priorityBlockingQueue::线程安全， 内部排序， 属于BlockingQueue， 实现了priorityQueue（线程不安全）的接口
+						   也是用put(), take()				
+31, ForkJoinFramework::类似Map/Reduce, THREASHOLD就是每个任务中包括的个数，设为static， 
+					   调用forkJoinPool.invoke(Task), Task也是一个对象！
+					   效率不一定比单个线程高, 但数据越大， fork/
+					   （submit, Feature, ForkJoinPool, RecursiveTask, RecursiveAction, fork, join）
+					   RecursiveAction用于没有返回结果的任务，
+					   RecursiveTask用于有返回结果的任务
+32, ForkJoinMerge::merge本质就是两个有序子集合构成一个新的集合
+				   两个步骤：：拆分task， 每个最小的task执行Merge， 本质就是递归
+33, 分任务本质就是个二叉树
+	流程就是将task放到forkJoinPool中，调用invoke(Task)触发执行
+	invokeAll(leftTask, rightTask)
+	task1.fork(); task2.fork()
+34, conway game两种状态， 四种可能
+35, 可以在UI元素添加listener
+	响应事件里创建新线程
+36, 分布式的本质就是多线程
+37, 分布式分发任务，就是多线程分配任务
+38, 哲学家问题三个关键：：主线程中设置"吃饱"philosopher.setFull(true); 筷子包含lock， 提供pickup(), putDown(); 哲学家类包含leftChopStick, rightChopStick
+39， 学生图书问题关键：：书包含lock, 提供read()； 学生类包含book list
+
+
+
